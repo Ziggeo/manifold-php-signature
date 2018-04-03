@@ -1,0 +1,12 @@
+{
+	"name": "ziggeo/manifold-php-signature",
+	"description": "Verify signed HTTP request from Manifold",
+	"require": {
+		"paragonie/sodium_compat": "^1.6"
+	},
+	"autoload": {
+		"psr-4": {
+			"Manifold\\Verifier\\": "lib/"
+		}
+	}
+}
