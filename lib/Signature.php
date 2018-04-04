@@ -12,7 +12,8 @@ class Signature
 
 	function __construct($req) {
 		$this->req = $req;
-		//$this->rawBody = $req->rawBody;
+		if (empty($req["body"]))
+			$this->req["body"] = file_get_contents("php://input");
 		$this->message = "";
 
 		$this->xSignature = preg_split('/ /', $req["HTTP_X_SIGNATURE"]);
@@ -51,12 +52,13 @@ class Signature
 	 * @throws ValidationException
 	 */
 	function goodSignature($masterKey) {
-		$message = $this->message;
 		$mk = $this->__base64UrlDecode($masterKey);
+		$message = $this->message;
 
 		if (!$this->__validBuffers($mk)) {
-			throw new ValidationException('Invalid signature size');
+			throw new InvalidException('Invalid signature size');
 		}
+
 		if (!\Sodium\crypto_sign_verify_detached($this->endorsement, $this->publicKey, $mk)) {
 			throw new InvalidException('Failed to verify endorsement');
 		}
@@ -72,7 +74,7 @@ class Signature
 
 	function __canonize($req) {
 		$url_data = parse_url($req["REQUEST_URI"]);
-		$msg = $req["REQUEST_METHOD"] . " " . $url_data["path"];
+		$msg = strtolower($req["REQUEST_METHOD"]) . " " . $url_data["path"];
 		if (isset($url_data["query"]) && count($url_data["query"]) > 0) {
 			$qs = preg_split("/&/", $url_data["query"]);
 			sort($qs);
@@ -87,10 +89,12 @@ class Signature
 			$name = $header;
 			$key = preg_replace("/-/", "_", strtoupper($name));
 			if (isset($req["$key"]) || isset($req["HTTP_$key"])) {
-				$value = isset($req["$key"]) ? $req["$key"] : $req["HTTP_$key"];
-				$msg .= "$key: $value \n";
+				$value = isset($req["$key"]) ? trim($req["$key"]) : trim($req["HTTP_$key"]);
+				$msg .= "$name: $value\n";
 			}
 		}
+		if (isset($req["body"]))
+			$msg .= $req["body"];
 		return $msg;
 	}
 

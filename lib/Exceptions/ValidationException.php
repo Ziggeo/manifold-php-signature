@@ -8,8 +8,8 @@ Class ValidationException extends Exception {
 
 	private $data;
 
-	function __construct($data = array()) {
-		parent::__construct("Request Validation Failed", 400);
+	function __construct($data = "") {
+		parent::__construct("Request Validation Failed - $data", 400);
 		$this->data = $data;
 	}
 

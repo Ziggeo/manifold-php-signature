@@ -7,8 +7,8 @@ Class InvalidException extends Exception {
 
 	private $data;
 
-	function __construct($data = array()) {
-		parent::__construct("Invalid Request Signature", 401);
+	function __construct($data = "") {
+		parent::__construct("Invalid Request Signature - $data", 401);
 		$this->data = $data;
 	}
 
