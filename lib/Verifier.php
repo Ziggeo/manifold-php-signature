@@ -40,7 +40,4 @@ class Verifier
 		return $Signature->test($this->masterKey);
 	}
 
-	function __base64UrlDecode($data) {
-		return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
-	}
 }
