@@ -1,10 +1,10 @@
-#Manifold PHP Signature Verifier
+# Manifold PHP Signature Verifier
 Verify signed HTTP requests from Manifold.
-##Install
+## Install
 ```bash
 composer require ziggeo/manifold-php-verifier:dev-master
 ```
-##Usage
+## Usage
 ```php
 <?php
 require "vendor/autoload.php";
