@@ -8,7 +8,7 @@ use Manifold\Verifier\Exceptions\ValidationException;
 
 class Signature
 {
-	const PERMITTED_SKEW_IN_MS = 5 * 60 * 1000; // 5 minutes
+	const PERMITTED_SKEW_IN_MS =  300000; //5 * 60 * 1000 =  5 minutes
 
 	function __construct($req) {
 		$this->req = $req;
