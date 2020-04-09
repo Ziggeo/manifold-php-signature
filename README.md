@@ -2,7 +2,7 @@
 Verify signed HTTP requests from Manifold.
 ## Install
 ```bash
-composer require ziggeo/manifold-php-verifier:dev-master
+composer require ziggeo/manifold-php-verifier
 ```
 ## Usage
 ```php
