@@ -1,6 +1,7 @@
 {
 	"name": "ziggeo/manifold-php-signature",
 	"version": "1.0.0",
+	"license": "MIT",
 	"description": "Verify signed HTTP request from Manifold",
 	"require": {
 		"paragonie/sodium_compat": "^1.6"
