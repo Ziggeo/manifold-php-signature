@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"description": "Verify signed HTTP request from Manifold",
 	"require": {
-		"paragonie/sodium_compat": "^1.6"
+		"paragonie/sodium_compat": "^1.22|^2.3"
 	},
 	"autoload": {
 		"psr-4": {
